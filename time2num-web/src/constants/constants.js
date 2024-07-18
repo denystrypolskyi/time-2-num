@@ -18,7 +18,7 @@ export const COLORS = {
   darkGray: "#444444",
 };
 
-export const API_BASE_URL = "https://time-2-num-api.onrender.com";
+export const API_BASE_URL = "https://time2num.onrender.com";
 // export const API_BASE_URL = "http://localhost:3000";
 
 export const API_ENDPOINTS = {
