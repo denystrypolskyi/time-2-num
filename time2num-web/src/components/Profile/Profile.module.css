@@ -1,0 +1,40 @@
+.customContainer {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  flex-grow: 1;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+}
+
+.alert {
+  width: 40vw;
+}
+
+.profileContainer {
+  width: 40vw;
+  max-height: 380px;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  width: 128px;
+  height: 128px;
+  cursor: pointer;
+}
+
+.hiddenInput {
+  display: none;
+}

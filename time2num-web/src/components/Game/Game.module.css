@@ -1,0 +1,22 @@
+.customContainer {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+  flex-grow: 1;
+}
+
+.spinnerContainer {
+  width: 100%;
+  min-height: calc(100vh - 56px);
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+}
+
+.alert {
+  width: 40vw;
+}

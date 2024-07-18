@@ -1,0 +1,21 @@
+.customContainer {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  flex-grow: 1;
+}
+
+.alert {
+  width: 50vw;
+}
+
+.customFormContainer {
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  padding: 30px;
+  width: 50vw;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
