@@ -1,4 +1,9 @@
+## 📋 About
+
+This app challenges your memory by showing you a number that you need to remember within 10 seconds. The game continues until you provide an incorrect answer. There is also a leaderboard where you can compare your results with other players and see how you rank.
+
 ## 🛠️ Tech Stack
+
 <div>
   <img src="https://img.shields.io/badge/Frontend-React-blue?style=for-the-badge&logo=react" />
   <img src="https://img.shields.io/badge/Frontend-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
