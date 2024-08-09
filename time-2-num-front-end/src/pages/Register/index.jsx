@@ -17,6 +17,7 @@ const Register = () => {
     handleRegister(username, password, avatar);
   };
 
+
   return (
     <div className={styles.customContainer}>
       {isLoading ? (

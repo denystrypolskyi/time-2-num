@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const API_BASE_URL = "http://localhost:3000";
-// export const API_BASE_URL = "https://time2num.onrender.com";
+// export const API_BASE_URL = "http://localhost:3000";
+export const API_BASE_URL = "https://time2num.onrender.com";
 
 const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
