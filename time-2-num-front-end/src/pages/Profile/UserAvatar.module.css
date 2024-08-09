@@ -1,0 +1,10 @@
+.image {
+    width: 128px;
+    height: 128px;
+    cursor: pointer;
+  }
+  
+  .hiddenInput {
+    display: none;
+  }
+  

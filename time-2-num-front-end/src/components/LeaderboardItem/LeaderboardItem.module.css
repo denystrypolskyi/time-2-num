@@ -1,38 +1,34 @@
 .leaderboardItemContainer {
-    margin-top: 25px;
-    margin-bottom: 25px;
-    display: flex;
-    border-bottom: 2px solid #d9d9d9;
-    padding: 6px;
-  }
-  
-  .subContainer {
-    width: 90%;
-    display: flex;
-    align-items: center;
-  }
-  
-  .medal {
-    width: 48px;
-    margin-right: 25px;
-  }
-  
-  .userAvatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50px;
-    margin-right: 25px;
-  }
-  
-  .username {
-    font-weight: 500;
-  }
-  
-  .userLevel {
-    width: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 500;
-  }
-  
+  margin-top: 25px;
+  display: flex;
+}
+
+.subContainer {
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+
+.medal {
+  width: 48px;
+  margin-right: 25px;
+}
+
+.userAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50px;
+  margin-right: 25px;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.userLevel {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}

@@ -1,8 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import { fetchUserAvatarByUsername } from "../../api/api";
+import { useEffect, useState } from "react";
+
 import { storage } from "../../../firebase.js";
+
 import { ref, getDownloadURL } from "firebase/storage";
+
 import styles from "./LeaderboardItem.module.css";
+import { fetchAvatarByUsername } from "../../services/user.service.js";
 
 const LeaderboardItem = ({ username, levelReached, userRank, medal }) => {
   const [avatarURL, setAvatarURL] = useState(null);
@@ -11,7 +14,10 @@ const LeaderboardItem = ({ username, levelReached, userRank, medal }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const avatarURL = await fetchUserAvatarByUsername(username);
+        const response = await fetchAvatarByUsername(username);
+
+        const { avatarURL } = response.data;
+
         const downloadURL = await getDownloadURL(ref(storage, avatarURL));
         setAvatarURL(downloadURL);
       } catch (error) {
@@ -44,14 +50,17 @@ const LeaderboardItem = ({ username, levelReached, userRank, medal }) => {
   }, []);
 
   return (
-    <div className={styles.leaderboardItemContainer}>
-      <div className={styles.subContainer}>
-        <img src={medalURL} className={styles.medal} />
-        <img src={avatarURL} className={styles.userAvatar} />
-        <div className={styles.username}>{username}</div>
+    <>
+      <div className={styles.leaderboardItemContainer}>
+        <div style={{ marginLeft: "25px" }} className={styles.subContainer}>
+          <img src={medalURL} className={styles.medal} />
+          <img src={avatarURL} className={styles.userAvatar} />
+          <div className={styles.username}>{username}</div>
+        </div>
+        <div className={styles.userLevel}>{levelReached}</div>
       </div>
-      <div className={styles.userLevel}>{levelReached}</div>
-    </div>
+      <hr style={{marginBottom: "0px"}} />
+    </>
   );
 };
 

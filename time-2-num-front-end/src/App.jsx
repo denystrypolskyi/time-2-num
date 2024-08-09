@@ -1,106 +1,32 @@
-import { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { Alert, Spinner } from "react-bootstrap";
-import NavigationBar from "./components/NavigationBar/NavigationBar";
-import Register from "./components/Register/Register";
-import Login from "./components/Login/Login";
-import Leaderboard from "./components/Leaderboard/Leaderboard";
-import Profile from "./components/Profile/Profile";
-import Game from "./components/Game/Game";
-import { checkAuthentication } from "./api/api";
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
+
+import NavigationBar from "./components/NavigationBar";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Leaderboard from "./pages/Leaderboard";
+import Profile from "./pages/Profile";
+import Game from "./pages/Game";
+
+import { useAuth } from "./contexts/AuthContext.jsx";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-
-  useEffect(() => {
-    const fetchAuthStatus = async () => {
-      try {
-        const isAuthenticated = await checkAuthentication();
-        setIsLoggedIn(isAuthenticated);
-      } catch (error) {
-        setErrorMessage(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAuthStatus();
-  }, []);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-  };
-
-  if (isLoading) {
-    return (
-      <div
-        style={{
-          width: "100%",
-          minHeight: "calc(100vh - 56px)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          flexGrow: 1,
-        }}
-      >
-        <Spinner animation="border" variant="primary" />
-      </div>
-    );
-  }
-
-  if (errorMessage) {
-    return (
-      <div
-        style={{
-          width: "100%",
-          minHeight: "calc(100vh - 56px)",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          flexGrow: 1,
-        }}
-      >
-        <Alert variant="danger" style={{ width: "600px" }}>
-          <Alert.Heading>Error</Alert.Heading>
-          <p>{errorMessage}</p>
-        </Alert>
-      </div>
-    );
-  }
+  const { isAuthenticated } = useAuth();
   return (
     <Router>
-      <NavigationBar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
+      <NavigationBar />
       <Routes>
-        {!isLoggedIn && (
-          <>
-            <Route path="/" element={<Login onLogin={handleLogin} />} />
-            <Route path="/login" element={<Login onLogin={handleLogin} />} />
-            <Route path="/register" element={<Register />} />
-          </>
-        )}
-        {isLoggedIn && (
-          <>
-            <Route path="/" element={<Profile onLogout={handleLogout} />} />
-            <Route
-              path="/leaderboard"
-              element={<Leaderboard onLogout={handleLogout} />}
-            />
-            <Route
-              path="/profile"
-              element={<Profile onLogout={handleLogout} />}
-            />
-            <Route path="/game" element={<Game onLogout={handleLogout} />} />
-          </>
-        )}
+        <Route path="/" element={<Navigate to="login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Profile />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/game" element={<Game />} />
       </Routes>
     </Router>
   );

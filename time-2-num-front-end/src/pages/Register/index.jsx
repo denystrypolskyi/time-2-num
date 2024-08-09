@@ -1,32 +1,20 @@
 import { useState } from "react";
 import { Alert, Spinner, Button, Form } from "react-bootstrap";
-import { login } from "../../api/api";
-import { useNavigate } from "react-router-dom";
-import styles from "./Login.module.css";
 
-const Login = ({ onLogin }) => {
+import useRegister from "../../hooks/useRegister";
+
+import styles from "./Register.module.css";
+
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
 
-  const navigate = useNavigate();
+  const [avatar, setAvatar] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const { isLoading, errorMessage, handleRegister } = useRegister();
 
-    login(username, password)
-      .then(() => {
-        onLogin();
-        navigate("/profile");
-      })
-      .catch((error) => {
-        setErrorMessage(error.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const handleClick = () => {
+    handleRegister(username, password, avatar);
   };
 
   return (
@@ -36,15 +24,15 @@ const Login = ({ onLogin }) => {
       ) : (
         <>
           {errorMessage && (
-            <Alert className={styles.alert} variant="danger alert">
+            <Alert variant="danger" className={styles.alert}>
               <Alert.Heading>Error</Alert.Heading>
               <p>{errorMessage}</p>
             </Alert>
           )}
           <div className={`mb-4 ${styles.customFormContainer}`}>
-            <h1>Welcome</h1>
-            <h1 className="mb-4">Back</h1>
-            <Form onSubmit={handleSubmit}>
+            <h1>Create</h1>
+            <h1 className="mb-4">Account</h1>
+            <Form>
               <Form.Group className="mb-3" controlId="formBasicUsername">
                 <Form.Label style={{ fontWeight: 500 }}>Username</Form.Label>
                 <Form.Control
@@ -53,6 +41,7 @@ const Login = ({ onLogin }) => {
                   placeholder="Enter username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
+                  required
                 />
               </Form.Group>
 
@@ -64,14 +53,30 @@ const Login = ({ onLogin }) => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
                 />
               </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicProfilePicture">
+                <Form.Label style={{ fontWeight: 500 }}>
+                  Profile Picture
+                </Form.Label>
+                <Form.Control
+                  style={{ fontWeight: 500 }}
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setAvatar(e.target.files[0])}
+                />
+              </Form.Group>
+
               <Button
                 style={{ fontWeight: 500 }}
                 variant="primary"
                 type="submit"
+                disabled={isLoading}
+                onClick={handleClick}
               >
-                Sign In
+                Sign Up
               </Button>
             </Form>
           </div>
@@ -81,4 +86,4 @@ const Login = ({ onLogin }) => {
   );
 };
 
-export default Login;
+export default Register;

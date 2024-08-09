@@ -3,8 +3,8 @@ const validator = require("validator");
 const userRepository = require("../repositories/userRepository");
 const jwt = require("jsonwebtoken");
 
-const generateToken = (userId, username) => {
-  const payload = { userId, username };
+const generateToken = (userId, username, avatarURL) => {
+  const payload = { userId, username, avatarURL };
 
   const token = jwt.sign(payload, process.env.MY_SECRET, { expiresIn: "24h" });
 
@@ -44,6 +44,7 @@ const login = async (username, password) => {
   }
 
   const user = await userRepository.findByUsername(username);
+
   if (!user) {
     return { status: 404, message: "User not found!" };
   }
@@ -53,7 +54,7 @@ const login = async (username, password) => {
     return { status: 401, message: "Incorrect password!" };
   }
 
-  const token = generateToken(user._id, username);
+  const token = generateToken(user._id, username, user.avatarURL);
   return { status: 200, token, message: "Login successful!" };
 };
 

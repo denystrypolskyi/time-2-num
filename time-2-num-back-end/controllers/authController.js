@@ -34,7 +34,7 @@ const login = async (req, res) => {
 };
 
 const verifyToken = (req, res) => {
-  res.sendStatus(200);
+  res.status(200).send({user: req.user});
 };
 
 module.exports = {
