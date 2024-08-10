@@ -1,6 +1,6 @@
 ## 📋 About
 
-This app challenges your memory by showing you a number that you need to remember within 10 seconds. The game continues until you provide an incorrect answer. There is also a leaderboard where you can compare your results with other players and see how you rank.
+A web app designed to enhance your memory skills by challenging you to remember and write numbers of varying lengths. You’re shown a number for 10 seconds and must write it accurately to continue. Compete with others and track your performance on the leaderboard to see how you rank.
 
 ## 🛠️ Tech Stack
 
